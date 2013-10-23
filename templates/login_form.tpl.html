@@ -20,30 +20,19 @@ function validateForm(f)
 <form name="login_form" onSubmit="return checkFormSubmission(this, 'validateForm');" method="post" action="login.php">
 <input type="hidden" name="cat" value="login">
 <input type="hidden" name="url" value="{$smarty.get.url|escape:"html"}">
-<table align="center" width="400" border="0" cellspacing="0" cellpadding="1" bgcolor="#FFFFFF">
-  <tr>
-    <td>
-      <table bgcolor="#FFFFFF" width="100%" border="0" cellspacing="0" cellpadding="4">
-        <tr>
-          <td colspan="2" align="center">
-            <br /><br />
+      <div class="logintitle">
             <h3>{$app_setup.tool_caption|default:$application_title} - {t}Login{/t}</h3>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-<table align="center" width="400" border="0" cellspacing="0" cellpadding="1" bgcolor="#000000">
+      </div>
+<table class="loginmain" align="center" border="0" cellspacing="0" cellpadding="1">
   <tr>
     <td>
-      <table bgcolor="#FFFFFF" width="100%" border="0" cellspacing="0" cellpadding="4">
+      <table bgcolor="#FFFFFF" class="login" width="100%" border="0" cellspacing="0" cellpadding="4">
         <tr>
-          <td colspan="2" bgcolor="#006486"><img src="images/blank.gif" width="1" height="5"></td>
+          <td colspan="2"><img src="images/blank.gif" width="1" height="5"></td>
         </tr>
         {if $smarty.get.err != 0}
         <tr>
-          <td colspan="2" align="center" class="error" bgcolor="#006486">
+          <td colspan="2" align="center" class="loginerror">
             <b>
             {if $smarty.get.err == 1}
               {t}Error{/t}: {t}Please provide your email address.{/t}
@@ -73,16 +62,16 @@ function validateForm(f)
         </tr>
         {/if}
         <tr>
-          <td align="right" width="40%" class="default_white" bgcolor="#006486"><b>{t}Email Address{/t}:</b></td>
-          <td width="60%" bgcolor="#006486">
-            <input accessKey="e" class="default" type="text" name="email" value="{$email|default:$smarty.get.email|escape:"html"}" size="30">
+          <td align="right" width="40%" class="logintext"><b>{t}Email Address{/t}:</b></td>
+          <td width="60%">
+            <input accessKey="e" class="logininput" type="text" name="email" value="{$email|default:$smarty.get.email|escape:"html"}" size="30">
             {include file="error_icon.tpl.html" field="email"}
           </td>
         </tr>
         <tr>
-          <td align="right" width="40%" class="default_white" bgcolor="#006486"><b>{t}Password{/t}:</b></td>
-          <td width="60%" bgcolor="#006486">
-            <input accessKey="p" class="default" type="password" name="passwd" size="20" maxlength="32">
+          <td align="right" width="40%" class="logintext"><b>{t}Password{/t}:</b></td>
+          <td width="60%">
+            <input accessKey="p" class="logininput" type="password" name="passwd" size="30" maxlength="32">
             {include file="error_icon.tpl.html" field="passwd"}
           </td>
         </tr>
@@ -97,18 +86,18 @@ function validateForm(f)
         </tr>
 
         <tr align="center">
-          <td colspan="2" bgcolor="#006486">
+          <td colspan="2">
             <input type="submit" name="Submit" value="{t}Login{/t}" class="button">
           </td>
         </tr>
         <tr align="center">
-          <td colspan="2" class="default_white" bgcolor="#006486">
+          <td colspan="2" class="loginforgot">
             <a class="white_link" href="forgot_password.php{if $smarty.get.email != ""}?email={$smarty.get.email|escape:"html"}{/if}">{t}I Forgot My Password{/t}</a>&nbsp;&nbsp;
             {if $app_setup.open_signup == 'enabled'}<a class="white_link" href="signup.php">{t}Signup for an Account{/t}</a>{/if}
           </td>
         </tr>
         <tr>
-          <td bgcolor="#006486" colspan="2" align="center" class="default_white">
+          <td colspan="2" align="center" class="loginnote">
             <b>* {t}Requires support for cookies and javascript in your browser{/t}</b>
           </td>
         </tr>

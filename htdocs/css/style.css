@@ -1,31 +1,142 @@
+body
+{
+  font-family: "Constantina", Verdana, Arial, Helvetica, sans-serif;
+  line-height: 15px;
+}
+
+a:link,a:active,a:visited
+{
+  text-decoration:none;
+  border-bottom:1px dashed #CCC;
+}
+
+a:hover
+{
+  text-decoration:none;
+  border-bottom:1px dashed #FFF;
+}
+
+tr
+{
+background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgba(0,0,0,0)),
+    color-stop(1, rgba(255,255,255,0.2))
+);
+background-image: -moz-linear-gradient(
+    center bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(255,255,255,0.2) 100%
+);
+}
+
+.login{
+color:#000;
+}
+
+.logintitle{
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	height: 50px;
+	width: 400px;
+	text-align: center;
+	padding: 10px;
+	margin: 0px auto 10px;
+}
+
+.logintitle h3{
+	font-size: 35px;
+	font-family: "Calibri", Verdana, Arial, Helvetica, sans-serif;
+	text-shadow: 0px 0px 5px #FFFFFF, 0px 0px 5px #FFFFFF, 0px 0px 5px #FFFFFF;
+}
+
+.loginmain {
+}
+
+.loginmain tr {
+	background-image: none;
+        }
+
+.logininput {
+                    width: 250px;
+	            margin-top: 10px;
+                    padding: 4px 8px;
+                    border: 1px solid #2f2f2f;
+                    outline: none;
+                    background: #393939;
+                    font-weight: bold;
+                    color: #fff;
+		    font-family: "Calibri", Verdana, Arial, Helvetica, sans-serif;
+            }
+
+.login {
+                background: #e9eaee;
+                border: 2px solid #ffffff;
+                padding: 0px 10px 0px 10px;
+                width: 460px;
+                text-align: center;
+                box-shadow: 1px 2px 16px rgba(0,0,0, 0.5);
+                -moz-box-shadow: 1px 2px 16px rgba(0,0,0, 0.5);
+                -webkit-box-shadow: 1px 2px 16px rgba(0,0,0, 0.5);
+		-webkit-border-radius: 50px;
+		-moz-border-radius: 50px;
+		border-radius: 50px;
+		font-size: 15px;
+            }
+
+.logintext {
+	font-size: 15px;
+	padding-top: 10px;
+}
+
+.loginnote {
+	font-size: 12px;
+}
+
+.loginforgot a:link,.loginforgot a:active,.loginforgot a:visited,.loginforgot a:hover { 
+	font-size: 13px;
+	color: #444444; 
+}
+
+.loginerror
+{
+        	background: #F2BC3D;
+                margin: 44px 44px 44px 44px;
+                border: 0px solid #ffffff;
+                box-shadow: 1px 2px 6px rgba(0,0,0, 0.5);
+                -moz-box-shadow: 1px 2px 6px rgba(0,0,0, 0.5);
+                -webkit-box-shadow: 1px 2px 6px rgba(0,0,0, 0.5);
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+}
+
 .default {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 70%;
 }
 .default_overlib {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 100%;
 }
 .default_white {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 70%;
   color: #FFFFFF;
 }
 .error {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   color: yellow;
   font-size: 70%;
 }
 .paging_input {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 70%;
@@ -33,41 +144,34 @@
   text-align: center;
 }
 .button {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 65%;
   font-weight: bold
 }
 .button_overlib {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 100%;
   font-weight: bold
 }
 h1 {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 200%;
 }
 h2 {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 180%;
 }
 h3 {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 160%;
 }
 h4 {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 120%;
 }
 .shortcut {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 60%;
@@ -103,20 +207,17 @@ h4 {
   text-decoration: none;
 }
 .spacer {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 90%;
+      font-size: 90%;
     font-style: normal;
     border-right: dotted 1px #000000;
 }
 .horizontal_spacer {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 90%;
+      font-size: 90%;
     font-style: normal;
     border-top: dotted 1px #000000;
     border-bottom: dotted 1px #000000;
 }
 .lookup_field {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 55%;
@@ -124,7 +225,6 @@ h4 {
   border: 1px solid #999999;
 }
 .lookup_field_overlib {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 90%;
@@ -132,17 +232,14 @@ h4 {
   border: 1px solid #999999;
 }
 .footer {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 60%;
 }
 .small_default {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 60%;
 }
 .small_default_white {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 60%;
   color: #FFFFFF;
@@ -153,7 +250,6 @@ h4 {
   text-decoration: underline;
 }
 .banner_red {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 70%;
   font-weight: bold;
@@ -170,7 +266,6 @@ div.app_messages {
     font-weight: bold;
     text-align: center;
     font-size: 70%;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
     padding: 10px;
 }
 .custom_field {

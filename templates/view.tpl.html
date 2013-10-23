@@ -33,30 +33,38 @@
   {include file="customer/$customer_backend_name/customer_info.tpl.html"}
   <div class="view_issue_seperator"></div>
   {/if}
-  {include file="attachments.tpl.html"}
-  <div class="view_issue_seperator"></div>
   {if $current_role > $roles.customer and $app_setup.scm_integration == 'enabled'}
   {include file="checkins.tpl.html"}
   <div class="view_issue_seperator"></div>
   {/if}
-  {if $current_role > $roles.customer}
-  {include file="time_tracking.tpl.html"}
-  <div class="view_issue_seperator"></div>
-  {/if}
-  {if $current_role > $roles.customer}
-  {include file="notes.tpl.html"}
-  <div class="view_issue_seperator"></div>
-  {/if}
-  {if $current_role > $roles.customer}
-  {include file="phone_support.tpl.html"}
-  <div class="view_issue_seperator"></div>
-  {/if}
   {if $app_setup.support_email == 'enabled'}
+  {include file="support_emails.tpl.html"}
+    {if $APP_DRAFTS_SUPPORT == true}
     {if $current_role > $roles.customer}
       {include file="email_drafts.tpl.html"}
       <div class="view_issue_seperator"></div>
     {/if}
-  {include file="support_emails.tpl.html"}
+    {/if}
+  {/if}
+  {include file="attachments.tpl.html"}
+  <div class="view_issue_seperator"></div>
+  {if $APP_PHONE_SUPPORT == true}
+  {if $current_role > $roles.customer}
+  {include file="phone_support.tpl.html"}
+  <div class="view_issue_seperator"></div>
+  {/if}
+  {/if}
+  {if $APP_NOTES_SUPPORT == true}
+  {if $current_role > $roles.customer}
+  {include file="notes.tpl.html"}
+  <div class="view_issue_seperator"></div>
+  {/if}
+  {/if}
+  {if $APP_TIME_TRACKING_SUPPORT == true}
+  {if $current_role > $roles.customer}
+  {include file="time_tracking.tpl.html"}
+  <div class="view_issue_seperator"></div>
+  {/if}
   {/if}
 {/if}
 

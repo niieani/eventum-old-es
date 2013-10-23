@@ -90,7 +90,7 @@ DEFINE("JPG_DEBUG",false);
 // Note 2: If enabled then truetype fonts will look very ugly
 // => You can't have both background images and truetype fonts in the same
 // image until these bugs has been fixed in GD 2.01
-DEFINE('USE_TRUECOLOR',false);
+DEFINE('USE_TRUECOLOR',true);
 
 //------------------------------------------------------------------
 // Constants which are used as parameters for the method calls
@@ -104,6 +104,7 @@ DEFINE("FF_HANDWRT",13);
 DEFINE("FF_COMIC",14);
 DEFINE("FF_ARIAL",15);
 DEFINE("FF_BOOK",16);
+DEFINE("FF_IWONA",11);
 
 // TTF Font styles
 DEFINE("FS_NORMAL",1);
@@ -1086,7 +1087,8 @@ class TTF {
 	    FF_HANDWRT => TTF_DIR."handwriting",
 	    FF_COMIC => TTF_DIR."comic",
 	    FF_ARIAL => TTF_DIR."arial",
-	    FF_BOOK => TTF_DIR."bookant");
+	    FF_BOOK => TTF_DIR."bookant",
+	    FF_IWONA => TTF_DIR."iwona");
     }
 
 //---------------

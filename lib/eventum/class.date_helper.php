@@ -38,6 +38,9 @@ if (!defined('APP_DEFAULT_TIMEZONE')) {
 if (!defined('APP_DEFAULT_WEEKDAY')) {
     define('APP_DEFAULT_WEEKDAY', 0);
 }
+if (!defined('APP_DATE_FORMATTING_STYLE')) {
+    define('APP_DATE_FORMATTING_STYLE', '%a, %d %b %Y, %H:%M:%S (%Z)');
+}
 
 /**
  * Class to handle date convertion issues, which enable the
@@ -192,10 +195,18 @@ class Date_Helper
         if (!$timezone) {
             $timezone = self::getPreferredTimezone();
         }
+
+	$date = new DateTime($timestamp, new DateTimeZone('GMT'));
+	$dateTimeZone = new DateTimeZone($timezone);
+        $date->setTimeZone($dateTimeZone);
+	return $date->getTimestamp();
+
+	/** DEPRACATED
         $date = new Date($timestamp);
         // now convert to another timezone and return the timestamp
         $date->convertTZById($timezone);
         return $date->getDate(DATE_FORMAT_UNIXTIME);
+	**/
     }
 
 
@@ -212,10 +223,17 @@ class Date_Helper
         if (!$timezone) {
             $timezone = self::getPreferredTimezone();
         }
+
+	$date = DateTime($timestamp, new DateTimeZone($timezone));
+	$date->setTimezone(new DateTimeZone("GMT"));
+	return $date->format(DateTime::RFC822);
+
+	/**
         $date = new Date($timestamp);
         // now convert to another timezone and return the date
         $date->convertTZById($timezone);
         return $date->format('%a, %d %b %Y %H:%M:%S') . " GMT";
+	*/
     }
 
 
@@ -239,7 +257,17 @@ class Date_Helper
      */
     function getTimezoneList()
     {
-    	$time_zones = Date_TimeZone::getAvailableIDs();
+	$timezone_abbreviations = DateTimeZone::listAbbreviations();
+	$time_zones = array();
+	foreach($timezone_abbreviations as $timezoneData)
+	{
+		foreach($timezoneData as $timezone)
+		{
+			$time_zones[] = $timezone['timezone_id'];
+		}
+	}
+	$time_zones = array_unique($time_zones);
+    	//$time_zones = Date_TimeZone::getAvailableIDs();
     	asort($time_zones);
         return $time_zones;
     }
@@ -292,10 +320,20 @@ class Date_Helper
             $timezone = self::getPreferredTimezone();
         }
 
+	// THIS CODE REQUIRES PHP >= 5.3.0
+        (is_int($ts)) ? ($dateTime = new DateTime("@$ts", new DateTimeZone('GMT'))) : ($dateTime = new DateTime($ts, new DateTimeZone('GMT')));
+        $dateTimeZone = new DateTimeZone($timezone);
+        $dateTime->setTimeZone($dateTimeZone);
+        date_default_timezone_set(timezone_name_get($dateTimeZone));
+        return strftime(APP_DATE_FORMATTING_STYLE, $dateTime->getTimestamp());
+
+	/**
+	  *  THIS CODE IS NOW DEPRACATED
         $date = self::getDateGMT($ts);
         // now convert to another timezone and return the date
         $date->convertTZById($timezone);
         return $date->format('%a, %d %b %Y, %H:%M:%S %Z');
+	  **/
     }
 
 

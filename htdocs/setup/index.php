@@ -475,11 +475,11 @@ $private_key = "' . md5(microtime()) . '";
     $res = mysql_query($stmt, $conn);
     $mysql_version = mysql_result($res, 0, 0);
     preg_match('/(\d{1,2}\.\d{1,2}\.\d{1,2})/', $mysql_version, $matches);
-    if ($matches[1] > '4.0.23') {
-        $config_contents = str_replace("'%{APP_ENABLE_FULLTEXT}%'", "true", $config_contents);
-    } else {
+//    if ($matches[1] > '4.0.23') {
+//        $config_contents = str_replace("'%{APP_ENABLE_FULLTEXT}%'", "true", $config_contents);
+//    } else {
         $config_contents = str_replace("'%{APP_ENABLE_FULLTEXT}%'", "false", $config_contents);
-    }
+//    }
 
     $fp = @fopen($config_file_path, 'w');
     if ($fp === false) {

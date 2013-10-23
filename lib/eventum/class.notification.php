@@ -38,7 +38,7 @@
 class Notification
 {
     /**
-     * Method used to check whether a given email address is subsbribed to
+     * Method used to check whether a given email address is subscribed to
      * email notifications for a given issue.
      *
      * @access  public
@@ -1145,7 +1145,9 @@ class Notification
     {
         if (Customer::hasCustomerIntegration($prj_id)) {
             Customer::notifyAutoCreatedIssue($prj_id, $issue_id, $sender, $date, $subject);
-        } else {
+        }
+	//elseif (APP_NOTIFY_AUTO_CREATED_ISSUE == false) return false;
+	else {
             if ($additional_recipient != false) {
                 $recipient = $additional_recipient;
                 $is_message_sender = false;
@@ -1227,7 +1229,8 @@ class Notification
     {
         if (Customer::hasCustomerIntegration($prj_id)) {
             return Customer::notifyEmailConvertedIntoIssue($prj_id, $issue_id, $sup_ids, $customer_id);
-        } else {
+        }
+	else {
             // build the list of recipients
             $recipients = array();
             $recipient_emails = array();

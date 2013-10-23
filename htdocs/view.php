@@ -32,6 +32,15 @@ require_once dirname(__FILE__) . '/../init.php';
 $tpl = new Template_Helper();
 $tpl->setTemplate("view.tpl.html");
 
+if (!defined('APP_DRAFTS_SUPPORT')) define('APP_DRAFTS_SUPPORT', true);
+$tpl->assign("APP_DRAFTS_SUPPORT", APP_DRAFTS_SUPPORT);
+if (!defined('APP_PHONE_SUPPORT')) define('APP_PHONE_SUPPORT', true);
+$tpl->assign("APP_PHONE_SUPPORT", APP_PHONE_SUPPORT);
+if (!defined('APP_NOTES_SUPPORT')) define('APP_NOTES_SUPPORT', true);
+$tpl->assign("APP_NOTES_SUPPORT", APP_NOTES_SUPPORT);
+if (!defined('APP_TIME_TRACKING_SUPPORT')) define('APP_TIME_TRACKING_SUPPORT', true);
+$tpl->assign("APP_TIME_TRACKING_SUPPORT", APP_TIME_TRACKING_SUPPORT);
+
 Auth::checkAuthentication(APP_COOKIE);
 
 $prj_id = Auth::getCurrentProject();

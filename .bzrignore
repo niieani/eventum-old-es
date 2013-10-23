@@ -1,6 +1,7 @@
 .idea
 .project
 .settings
+config/
 config/config.php
 config/private_key.php
 config/setup.php

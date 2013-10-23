@@ -36,13 +36,13 @@ if (!file_exists(dirname(__FILE__) . '/config/config.php') || !filesize(dirname(
 // setup change some PHP settings
 ini_set('allow_url_fopen', 0);
 set_time_limit(0);
-ini_set('memory_limit', '128M');
+if(defined('APP_MEMORY_LIMIT')) ini_set('memory_limit', APP_MEMORY_LIMIT);
 
 // prevent session from messing up the browser cache
 ini_set('session.cache_limiter', 'nocache');
 
 define('APP_URL', 'https://launchpad.net/eventum/');
-define('APP_VERSION', '2.3.3');
+define('APP_VERSION', '2.3.3-innoDB');
 
 // define base path
 define('APP_PATH', realpath(dirname(__FILE__)));

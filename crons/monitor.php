@@ -42,17 +42,17 @@ define('STATE_DEPENDENT', 4);
 $required_files = array(
     APP_CONFIG_PATH . '/config.php' => array(
         'check_owner'      => true,
-        'owner'            => 'apache',
+        'owner'            => 'eventum',
         'check_group'      => true,
-        'group'            => 'apache',
+        'group'            => 'eventum',
         'check_permission' => true,
         'permission'       => 640,
     ),
     APP_CONFIG_PATH . '/setup.php' => array(
         'check_owner'      => true,
-        'owner'            => 'apache',
+        'owner'            => 'eventum',
         'check_group'      => true,
-        'group'            => 'apache',
+        'group'            => 'eventum',
         'check_permission' => true,
         'permission'       => 660,
         'check_filesize'   => true,
@@ -98,8 +98,9 @@ if ($errors) {
     // propagate status code to shell
     exit(STATE_CRITICAL);
 }
-
+/*
 if (!$quiet) {
     echo ev_gettext("OK: No errors found"), "\n";
 }
+*/
 exit(STATE_OK);

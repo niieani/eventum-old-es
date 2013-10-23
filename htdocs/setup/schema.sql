@@ -43,7 +43,7 @@ CREATE TABLE `%TABLE_PREFIX%custom_filter` (
   cst_custom_field TEXT,
   PRIMARY KEY  (cst_id),
   KEY cst_usr_id (cst_usr_id,cst_prj_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%email_account`;
 CREATE TABLE `%TABLE_PREFIX%email_account` (
@@ -63,7 +63,7 @@ CREATE TABLE `%TABLE_PREFIX%email_account` (
   PRIMARY KEY  (ema_id),
   KEY ema_prj_id (ema_prj_id),
   UNIQUE (ema_username, ema_hostname(100), ema_folder(100))
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%history_type`;
 CREATE TABLE `%TABLE_PREFIX%history_type` (
@@ -72,7 +72,7 @@ CREATE TABLE `%TABLE_PREFIX%history_type` (
   htt_role tinyint(1) DEFAULT 0,
   PRIMARY KEY(htt_id),
   UNIQUE (htt_name)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%history_type` SET htt_name = 'attachment_removed';
 INSERT INTO `%TABLE_PREFIX%history_type` SET htt_name = 'attachment_added';
 INSERT INTO `%TABLE_PREFIX%history_type` SET htt_name = 'custom_field_updated';
@@ -179,16 +179,15 @@ CREATE TABLE `%TABLE_PREFIX%issue` (
   KEY iss_prc_id (iss_prc_id),
   KEY iss_res_id (iss_res_id),
   KEY iss_grp_id (iss_grp_id),
-  KEY iss_duplicated_iss_id (iss_duplicated_iss_id),
-  FULLTEXT ft_issue (iss_summary, iss_description)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+  KEY iss_duplicated_iss_id (iss_duplicated_iss_id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_association`;
 CREATE TABLE `%TABLE_PREFIX%issue_association` (
   isa_issue_id int(10) unsigned NOT NULL default 0,
   isa_associated_id int(10) unsigned NOT NULL default 0,
   KEY isa_issue_id (isa_issue_id,isa_associated_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_attachment`;
 CREATE TABLE `%TABLE_PREFIX%issue_attachment` (
@@ -202,7 +201,7 @@ CREATE TABLE `%TABLE_PREFIX%issue_attachment` (
   iat_not_id int(11) unsigned DEFAULT NULL,
   PRIMARY KEY  (iat_id),
   KEY iat_iss_id (iat_iss_id,iat_usr_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_attachment_file`;
 CREATE TABLE `%TABLE_PREFIX%issue_attachment_file` (
@@ -214,7 +213,7 @@ CREATE TABLE `%TABLE_PREFIX%issue_attachment_file` (
   iaf_filesize varchar(32) NOT NULL default '',
   PRIMARY KEY  (iaf_id),
   KEY iaf_iat_id (iaf_iat_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_checkin`;
 CREATE TABLE `%TABLE_PREFIX%issue_checkin` (
@@ -229,7 +228,7 @@ CREATE TABLE `%TABLE_PREFIX%issue_checkin` (
   isc_commit_msg text,
   PRIMARY KEY  (isc_id),
   KEY isc_iss_id (isc_iss_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_history`;
 CREATE TABLE `%TABLE_PREFIX%issue_history` (
@@ -244,7 +243,7 @@ CREATE TABLE `%TABLE_PREFIX%issue_history` (
   KEY his_id (his_id),
   KEY his_iss_id (his_iss_id),
   KEY his_created_date (his_created_date)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_requirement`;
 CREATE TABLE `%TABLE_PREFIX%issue_requirement` (
@@ -261,7 +260,7 @@ CREATE TABLE `%TABLE_PREFIX%issue_requirement` (
   KEY isr_iss_id (isr_iss_id),
   KEY isr_usr_id (isr_usr_id),
   KEY isr_updated_usr_id (isr_updated_usr_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_user`;
 CREATE TABLE `%TABLE_PREFIX%issue_user` (
@@ -273,7 +272,7 @@ CREATE TABLE `%TABLE_PREFIX%issue_user` (
   INDEX isu_order (isu_order),
   KEY isu_usr_id (isu_usr_id),
   KEY isu_iss_id (isu_iss_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%note`;
 CREATE TABLE `%TABLE_PREFIX%note` (
@@ -293,9 +292,8 @@ CREATE TABLE `%TABLE_PREFIX%note` (
   PRIMARY KEY  (not_id),
   KEY not_bug_id (not_iss_id,not_usr_id),
   KEY not_message_id (not_message_id),
-  KEY not_parent_id (not_parent_id),
-  FULLTEXT ft_note (not_title,not_note)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+  KEY not_parent_id (not_parent_id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_priority`;
 CREATE TABLE `%TABLE_PREFIX%project_priority` (
@@ -305,7 +303,7 @@ CREATE TABLE `%TABLE_PREFIX%project_priority` (
   pri_rank TINYINT(1) NOT NULL,
   PRIMARY KEY (pri_id),
   UNIQUE KEY pri_title (pri_title, pri_prj_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%project_priority` (pri_id, pri_prj_id, pri_title, pri_rank) VALUES (1, 1, 'Critical', 1);
 INSERT INTO `%TABLE_PREFIX%project_priority` (pri_id, pri_prj_id, pri_title, pri_rank) VALUES (2, 1, 'High', 2);
 INSERT INTO `%TABLE_PREFIX%project_priority` (pri_id, pri_prj_id, pri_title, pri_rank) VALUES (3, 1, 'Medium', 3);
@@ -332,7 +330,7 @@ CREATE TABLE `%TABLE_PREFIX%project` (
   PRIMARY KEY  (prj_id),
   UNIQUE KEY prj_title (prj_title),
   KEY prj_lead_usr_id (prj_lead_usr_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%project` (prj_id, prj_created_date, prj_title, prj_status, prj_lead_usr_id, prj_initial_sta_id, prj_remote_invocation, prj_anonymous_post, prj_anonymous_post_options, prj_outgoing_sender_name, prj_outgoing_sender_email) VALUES (1, NOW(), 'Default Project', 'active', 2, 1, '', '0', NULL, 'Default Project', 'default_project@example.com');
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_field_display`;
@@ -341,7 +339,7 @@ CREATE TABLE `%TABLE_PREFIX%project_field_display` (
   pfd_field varchar(20) NOT NULL,
   pfd_min_role tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (pfd_prj_id, pfd_field)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_category`;
 CREATE TABLE `%TABLE_PREFIX%project_category` (
@@ -351,7 +349,7 @@ CREATE TABLE `%TABLE_PREFIX%project_category` (
   PRIMARY KEY  (prc_id),
   UNIQUE KEY uniq_category (prc_prj_id,prc_title),
   KEY prc_prj_id (prc_prj_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%project_category` (prc_id, prc_prj_id, prc_title) VALUES (1, 1, 'Bug');
 INSERT INTO `%TABLE_PREFIX%project_category` (prc_id, prc_prj_id, prc_title) VALUES (2, 1, 'Feature Request');
 INSERT INTO `%TABLE_PREFIX%project_category` (prc_id, prc_prj_id, prc_title) VALUES (3, 1, 'Technical Support');
@@ -366,7 +364,7 @@ CREATE TABLE `%TABLE_PREFIX%project_release` (
   PRIMARY KEY  (pre_id),
   UNIQUE KEY pre_title (pre_prj_id, pre_title),
   KEY pre_prj_id (pre_prj_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%project_release` (pre_id, pre_prj_id, pre_title, pre_scheduled_date, pre_status) VALUES (1, 1, 'Example Release', (CURDATE() + INTERVAL 1 MONTH), 'available');
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_user`;
@@ -377,7 +375,7 @@ CREATE TABLE `%TABLE_PREFIX%project_user` (
   pru_role tinyint(1) unsigned NOT NULL default 1,
   PRIMARY KEY  (pru_id),
   UNIQUE KEY pru_prj_id (pru_prj_id,pru_usr_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%project_user` (pru_id, pru_prj_id, pru_usr_id, pru_role) VALUES (1, 1, 2, 7);
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%resolution`;
@@ -387,7 +385,8 @@ CREATE TABLE `%TABLE_PREFIX%resolution` (
   res_created_date datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (res_id),
   UNIQUE KEY res_title (res_title)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `%TABLE_PREFIX%resolution` (res_id, res_title, res_created_date) VALUES (1, 'open', NOW());
 INSERT INTO `%TABLE_PREFIX%resolution` (res_id, res_title, res_created_date) VALUES (2, 'fixed', NOW());
 INSERT INTO `%TABLE_PREFIX%resolution` (res_id, res_title, res_created_date) VALUES (4, 'unable to reproduce', NOW());
 INSERT INTO `%TABLE_PREFIX%resolution` (res_id, res_title, res_created_date) VALUES (5, 'not fixable', NOW());
@@ -406,7 +405,7 @@ CREATE TABLE `%TABLE_PREFIX%subscription` (
   sub_email varchar(255) default NULL,
   PRIMARY KEY  (sub_id),
   KEY sub_iss_id (sub_iss_id,sub_usr_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%subscription_type`;
 CREATE TABLE `%TABLE_PREFIX%subscription_type` (
@@ -415,7 +414,7 @@ CREATE TABLE `%TABLE_PREFIX%subscription_type` (
   sbt_type varchar(10) NOT NULL default '',
   PRIMARY KEY  (sbt_id),
   KEY sbt_sub_id (sbt_sub_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%support_email`;
 CREATE TABLE `%TABLE_PREFIX%support_email` (
@@ -440,16 +439,15 @@ CREATE TABLE `%TABLE_PREFIX%support_email` (
   KEY (sup_removed, sup_ema_id, sup_iss_id),
   KEY (sup_removed, sup_ema_id, sup_date),
   KEY sup_usr_id(sup_usr_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%support_email_body`;
 CREATE TABLE `%TABLE_PREFIX%support_email_body` (
   seb_sup_id int(11) unsigned NOT NULL,
   seb_body longtext NOT NULL,
   seb_full_email longblob NOT NULL,
-  PRIMARY KEY (seb_sup_id),
-  FULLTEXT ft_support_email (seb_body)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY (seb_sup_id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%time_tracking`;
 CREATE TABLE `%TABLE_PREFIX%time_tracking` (
@@ -462,9 +460,8 @@ CREATE TABLE `%TABLE_PREFIX%time_tracking` (
   ttr_summary varchar(255) NOT NULL default '',
   PRIMARY KEY  (ttr_id),
   KEY ttr_ttc_id (ttr_ttc_id,ttr_iss_id,ttr_usr_id),
-  KEY ttr_iss_id (ttr_iss_id),
-  FULLTEXT ft_time_tracking (ttr_summary)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+  KEY ttr_iss_id (ttr_iss_id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%time_tracking_category`;
 CREATE TABLE `%TABLE_PREFIX%time_tracking_category` (
@@ -473,7 +470,7 @@ CREATE TABLE `%TABLE_PREFIX%time_tracking_category` (
   ttc_created_date datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (ttc_id),
   UNIQUE KEY ttc_title (ttc_title)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%time_tracking_category` (ttc_id, ttc_title, ttc_created_date) VALUES (1, 'Development', NOW());
 INSERT INTO `%TABLE_PREFIX%time_tracking_category` (ttc_id, ttc_title, ttc_created_date) VALUES (2, 'Design', NOW());
 INSERT INTO `%TABLE_PREFIX%time_tracking_category` (ttc_id, ttc_title, ttc_created_date) VALUES (3, 'Planning', NOW());
@@ -504,7 +501,7 @@ CREATE TABLE `%TABLE_PREFIX%user` (
   UNIQUE KEY usr_email (usr_email),
   KEY usr_email_password (usr_email, usr_password),
   INDEX(usr_grp_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%user` (usr_id, usr_created_date, usr_status, usr_password, usr_full_name, usr_email, usr_preferences) VALUES (1, NOW(), 'inactive', '14589714398751513457adf349173434', 'system', 'system-account@example.com', '');
 INSERT INTO `%TABLE_PREFIX%user` (usr_id, usr_created_date, usr_password, usr_full_name, usr_email, usr_preferences) VALUES (2, NOW(), '21232f297a57a5a743894a0e4a801fc3', 'Admin User', 'admin@example.com', '');
 
@@ -533,7 +530,7 @@ CREATE TABLE `%TABLE_PREFIX%custom_field` (
   fld_rank smallint(2) NOT NULL default 0,
   fld_backend varchar(100),
   PRIMARY KEY  (fld_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%custom_field_option`;
 CREATE TABLE `%TABLE_PREFIX%custom_field_option` (
@@ -542,7 +539,7 @@ CREATE TABLE `%TABLE_PREFIX%custom_field_option` (
   cfo_value varchar(128) NOT NULL default '',
   PRIMARY KEY  (cfo_id),
   KEY icf_fld_id (cfo_fld_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_custom_field`;
 CREATE TABLE `%TABLE_PREFIX%issue_custom_field` (
@@ -554,9 +551,8 @@ CREATE TABLE `%TABLE_PREFIX%issue_custom_field` (
   icf_value_date date default NULL,
   PRIMARY KEY  (icf_id),
   KEY icf_iss_id (icf_iss_id),
-  KEY icf_fld_id (icf_fld_id),
-  FULLTEXT KEY `ft_icf_value` (`icf_value`)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+  KEY icf_fld_id (icf_fld_id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_custom_field`;
 CREATE TABLE `%TABLE_PREFIX%project_custom_field` (
@@ -566,7 +562,7 @@ CREATE TABLE `%TABLE_PREFIX%project_custom_field` (
   PRIMARY KEY  (pcf_id),
   KEY pcf_prj_id (pcf_prj_id),
   KEY pcf_fld_id (pcf_fld_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%email_response`;
 CREATE TABLE `%TABLE_PREFIX%email_response` (
@@ -575,7 +571,7 @@ CREATE TABLE `%TABLE_PREFIX%email_response` (
   ere_response_body text NOT NULL,
   PRIMARY KEY  (ere_id),
   UNIQUE KEY ere_title (ere_title)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%phone_support`;
 CREATE TABLE `%TABLE_PREFIX%phone_support` (
@@ -595,9 +591,8 @@ CREATE TABLE `%TABLE_PREFIX%phone_support` (
   phs_description text NOT NULL,
   PRIMARY KEY (phs_id),
   KEY phs_iss_id (phs_iss_id),
-  KEY phs_usr_id (phs_usr_id),
-  FULLTEXT ft_phone_support (phs_description)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+  KEY phs_usr_id (phs_usr_id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%status`;
 CREATE TABLE `%TABLE_PREFIX%status` (
@@ -611,7 +606,7 @@ CREATE TABLE `%TABLE_PREFIX%status` (
   UNIQUE KEY sta_abbreviation (sta_abbreviation),
   KEY sta_rank (sta_rank),
   KEY sta_is_closed (sta_is_closed)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%status` (sta_id, sta_title, sta_abbreviation, sta_rank, sta_color, sta_is_closed) VALUES (1, 'discovery', 'DSC', 1, '#CCFFFF', 0);
 INSERT INTO `%TABLE_PREFIX%status` (sta_id, sta_title, sta_abbreviation, sta_rank, sta_color, sta_is_closed) VALUES (2, 'requirements', 'REQ', 2, '#99CC66', 0);
 INSERT INTO `%TABLE_PREFIX%status` (sta_id, sta_title, sta_abbreviation, sta_rank, sta_color, sta_is_closed) VALUES (3, 'implementation', 'IMP', 3, '#6699CC', 0);
@@ -626,7 +621,7 @@ CREATE TABLE `%TABLE_PREFIX%project_status` (
   prs_sta_id int(10) unsigned NOT NULL,
   PRIMARY KEY (prs_id),
   KEY prs_prj_id (prs_prj_id, prs_sta_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%project_status` (prs_prj_id, prs_sta_id) VALUES (1, 1);
 INSERT INTO `%TABLE_PREFIX%project_status` (prs_prj_id, prs_sta_id) VALUES (1, 2);
 INSERT INTO `%TABLE_PREFIX%project_status` (prs_prj_id, prs_sta_id) VALUES (1, 3);
@@ -644,7 +639,7 @@ CREATE TABLE `%TABLE_PREFIX%customer_note` (
   cno_note TEXT,
   PRIMARY KEY(cno_id),
   UNIQUE(cno_prj_id, cno_customer_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%customer_account_manager`;
 CREATE TABLE `%TABLE_PREFIX%customer_account_manager` (
@@ -656,7 +651,7 @@ CREATE TABLE `%TABLE_PREFIX%customer_account_manager` (
   PRIMARY KEY (cam_id),
   KEY cam_customer_id (cam_customer_id),
   UNIQUE KEY cam_manager (cam_prj_id, cam_customer_id, cam_usr_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_level`;
 CREATE TABLE `%TABLE_PREFIX%reminder_level` (
@@ -668,7 +663,7 @@ CREATE TABLE `%TABLE_PREFIX%reminder_level` (
   rem_prj_id INT(11) UNSIGNED NOT NULL,
   rem_skip_weekend TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY(rem_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_priority`;
 CREATE TABLE `%TABLE_PREFIX%reminder_priority` (
@@ -676,7 +671,7 @@ CREATE TABLE `%TABLE_PREFIX%reminder_priority` (
   rep_rem_id INT(11) UNSIGNED NOT NULL,
   rep_pri_id INT(11) UNSIGNED NOT NULL,
   PRIMARY KEY(rep_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_requirement`;
 CREATE TABLE `%TABLE_PREFIX%reminder_requirement` (
@@ -687,7 +682,7 @@ CREATE TABLE `%TABLE_PREFIX%reminder_requirement` (
   rer_customer_id INT(11) UNSIGNED NULL,
   rer_trigger_all_issues TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY(rer_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_history`;
 CREATE TABLE `%TABLE_PREFIX%reminder_history` (
@@ -696,7 +691,7 @@ CREATE TABLE `%TABLE_PREFIX%reminder_history` (
   rmh_rma_id INT(11) NOT NULL,
   rmh_created_date DATETIME NOT NULL,
   PRIMARY KEY(rmh_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_action`;
 CREATE TABLE `%TABLE_PREFIX%reminder_action` (
@@ -711,14 +706,14 @@ CREATE TABLE `%TABLE_PREFIX%reminder_action` (
   rma_alert_group_leader TINYINT(1) unsigned NOT NULL DEFAULT 0,
   rma_boilerplate varchar(255) DEFAULT NULL,
   PRIMARY KEY(rma_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_action_list`;
 CREATE TABLE `%TABLE_PREFIX%reminder_action_list` (
   ral_rma_id INT(11) UNSIGNED NOT NULL,
   ral_email VARCHAR(255) NOT NULL,
   ral_usr_id INT(11) UNSIGNED NOT NULL
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_action_type`;
 CREATE TABLE `%TABLE_PREFIX%reminder_action_type` (
@@ -728,7 +723,7 @@ CREATE TABLE `%TABLE_PREFIX%reminder_action_type` (
   PRIMARY KEY(rmt_id),
   UNIQUE INDEX rmt_type (rmt_type),
   UNIQUE INDEX rmt_title (rmt_title)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%reminder_action_type` (rmt_type, rmt_title) VALUES ('email_assignee', 'Send Email Alert to Assignee');
 INSERT INTO `%TABLE_PREFIX%reminder_action_type` (rmt_type, rmt_title) VALUES ('sms_assignee', 'Send SMS Alert to Assignee');
 INSERT INTO `%TABLE_PREFIX%reminder_action_type` (rmt_type, rmt_title) VALUES ('email_list', 'Send Email Alert To...');
@@ -745,7 +740,7 @@ CREATE TABLE `%TABLE_PREFIX%reminder_level_condition` (
   rlc_value VARCHAR(64) NOT NULL,
   rlc_comparison_rmf_id tinyint(3) unsigned,
   PRIMARY KEY(rlc_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_field`;
 CREATE TABLE `%TABLE_PREFIX%reminder_field` (
@@ -756,7 +751,7 @@ CREATE TABLE `%TABLE_PREFIX%reminder_field` (
   rmf_allow_column_compare tinyint(1) DEFAULT 0,
   PRIMARY KEY(rmf_id),
   UNIQUE INDEX rmf_title(rmf_title)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%reminder_field` (rmf_title, rmf_sql_field, rmf_sql_representation, rmf_allow_column_compare) VALUES ('Status', 'iss_sta_id', 'iss_sta_id', 0);
 INSERT INTO `%TABLE_PREFIX%reminder_field` (rmf_title, rmf_sql_field, rmf_sql_representation, rmf_allow_column_compare) VALUES ('Last Response Date', 'iss_last_response_date', '(UNIX_TIMESTAMP() - IFNULL(UNIX_TIMESTAMP(iss_last_response_date), 0))', 1);
 INSERT INTO `%TABLE_PREFIX%reminder_field` (rmf_title, rmf_sql_field, rmf_sql_representation, rmf_allow_column_compare) VALUES ('Last Customer Action Date', 'iss_last_customer_action_date', '(UNIX_TIMESTAMP() - IFNULL(UNIX_TIMESTAMP(iss_last_customer_action_date), 0))', 1);
@@ -773,7 +768,7 @@ CREATE TABLE `%TABLE_PREFIX%reminder_operator` (
   rmo_sql_representation VARCHAR(32) NULL,
   PRIMARY KEY(rmo_id),
   UNIQUE INDEX rmo_title(rmo_title)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%reminder_operator` (rmo_title, rmo_sql_representation) VALUES ('equal to', '=');
 INSERT INTO `%TABLE_PREFIX%reminder_operator` (rmo_title, rmo_sql_representation) VALUES ('not equal to', '<>');
 INSERT INTO `%TABLE_PREFIX%reminder_operator` (rmo_title, rmo_sql_representation) VALUES ('is', 'IS');
@@ -793,14 +788,14 @@ CREATE TABLE `%TABLE_PREFIX%news` (
   nws_status varchar(8) NOT NULL default 'active',
   PRIMARY KEY (nws_id),
   UNIQUE KEY nws_title (nws_title)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_news`;
 CREATE TABLE `%TABLE_PREFIX%project_news` (
   prn_nws_id int(11) unsigned NOT NULL,
   prn_prj_id int(11) unsigned NOT NULL,
   PRIMARY KEY (prn_prj_id, prn_nws_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_round_robin`;
 CREATE TABLE `%TABLE_PREFIX%project_round_robin` (
@@ -810,14 +805,14 @@ CREATE TABLE `%TABLE_PREFIX%project_round_robin` (
   prr_blackout_end TIME NOT NULL,
   PRIMARY KEY (prr_id),
   UNIQUE KEY prr_prj_id (prr_prj_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%round_robin_user`;
 CREATE TABLE `%TABLE_PREFIX%round_robin_user` (
   rru_prr_id INT(11) UNSIGNED NOT NULL,
   rru_usr_id INT(11) UNSIGNED NOT NULL,
   rru_next TINYINT(1) UNSIGNED NULL
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%email_draft`;
 CREATE TABLE `%TABLE_PREFIX%email_draft` (
@@ -831,7 +826,7 @@ CREATE TABLE `%TABLE_PREFIX%email_draft` (
   emd_body LONGTEXT NOT NULL,
   emd_unknown_user varchar(255) NULL DEFAULT NULL,
   PRIMARY KEY(emd_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%email_draft_recipient`;
 CREATE TABLE `%TABLE_PREFIX%email_draft_recipient` (
@@ -840,7 +835,7 @@ CREATE TABLE `%TABLE_PREFIX%email_draft_recipient` (
   edr_is_cc TINYINT(1) UNSIGNED NOT NULL default 0,
   edr_email VARCHAR(255) NOT NULL,
   PRIMARY KEY(edr_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%irc_notice`;
 CREATE TABLE `%TABLE_PREFIX%irc_notice` (
@@ -851,7 +846,7 @@ CREATE TABLE `%TABLE_PREFIX%irc_notice` (
   ino_message VARCHAR(255) NOT NULL,
   ino_status VARCHAR(8) NOT NULL DEFAULT 'pending',
   PRIMARY KEY(ino_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_user_replier`;
 CREATE TABLE `%TABLE_PREFIX%issue_user_replier` (
@@ -862,7 +857,7 @@ CREATE TABLE `%TABLE_PREFIX%issue_user_replier` (
   PRIMARY KEY  (iur_id),
   KEY iur_usr_id (iur_usr_id),
   KEY iur_iss_id (iur_iss_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%mail_queue`;
 CREATE TABLE `%TABLE_PREFIX%mail_queue` (
@@ -883,7 +878,7 @@ CREATE TABLE `%TABLE_PREFIX%mail_queue` (
   KEY maq_iss_id (maq_iss_id),
   KEY (maq_type, maq_type_id),
   PRIMARY KEY(maq_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%mail_queue_log`;
 CREATE TABLE `%TABLE_PREFIX%mail_queue_log` (
@@ -894,7 +889,7 @@ CREATE TABLE `%TABLE_PREFIX%mail_queue_log` (
   mql_server_message TEXT NULL,
   KEY mql_maq_id (mql_maq_id),
   PRIMARY KEY(mql_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_status_date`;
 CREATE TABLE `%TABLE_PREFIX%project_status_date` (
@@ -905,7 +900,7 @@ CREATE TABLE `%TABLE_PREFIX%project_status_date` (
   psd_label VARCHAR(32) NOT NULL,
   PRIMARY KEY (psd_id),
   UNIQUE KEY (psd_prj_id, psd_sta_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%faq`;
 CREATE TABLE `%TABLE_PREFIX%faq` (
@@ -919,21 +914,21 @@ CREATE TABLE `%TABLE_PREFIX%faq` (
   faq_rank TINYINT(2) UNSIGNED NOT NULL,
   PRIMARY KEY (faq_id),
   UNIQUE KEY faq_title (faq_title)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%faq_support_level`;
 CREATE TABLE `%TABLE_PREFIX%faq_support_level` (
   fsl_faq_id INT(11) UNSIGNED NOT NULL,
   fsl_support_level_id INT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (fsl_faq_id, fsl_support_level_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_email_response`;
 CREATE TABLE `%TABLE_PREFIX%project_email_response` (
   per_prj_id int(11) unsigned NOT NULL,
   per_ere_id int(10) unsigned NOT NULL,
   PRIMARY KEY (per_prj_id, per_ere_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_phone_category`;
 CREATE TABLE `%TABLE_PREFIX%project_phone_category` (
@@ -943,7 +938,7 @@ CREATE TABLE `%TABLE_PREFIX%project_phone_category` (
   PRIMARY KEY  (phc_id),
   UNIQUE KEY uniq_category (phc_prj_id,phc_title),
   KEY phc_prj_id (phc_prj_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%project_phone_category` (phc_id, phc_prj_id, phc_title) VALUES (1, 1, 'Sales Issues');
 INSERT INTO `%TABLE_PREFIX%project_phone_category` (phc_id, phc_prj_id, phc_title) VALUES (2, 1, 'Technical Issues');
 INSERT INTO `%TABLE_PREFIX%project_phone_category` (phc_id, phc_prj_id, phc_title) VALUES (3, 1, 'Administrative Issues');
@@ -957,21 +952,21 @@ CREATE TABLE `%TABLE_PREFIX%group` (
   grp_manager_usr_id int(11) unsigned not null,
   PRIMARY KEY(grp_id),
   UNIQUE KEY (grp_name)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_group`;
 CREATE TABLE `%TABLE_PREFIX%project_group` (
   pgr_prj_id int(11) unsigned not null,
   pgr_grp_id int(11) unsigned not null,
   PRIMARY KEY (pgr_prj_id, pgr_grp_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%reminder_triggered_action`;
 CREATE TABLE `%TABLE_PREFIX%reminder_triggered_action` (
   rta_iss_id int(11) unsigned not null,
   rta_rma_id int(11) unsigned not null,
   PRIMARY KEY (rta_iss_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%issue_quarantine`;
 CREATE TABLE `%TABLE_PREFIX%issue_quarantine` (
@@ -980,7 +975,7 @@ CREATE TABLE `%TABLE_PREFIX%issue_quarantine` (
     iqu_status tinyint(1),
     PRIMARY KEY(iqu_iss_id),
     INDEX(iqu_expiration)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%link_filter`;
 CREATE TABLE `%TABLE_PREFIX%link_filter` (
@@ -990,14 +985,14 @@ CREATE TABLE `%TABLE_PREFIX%link_filter` (
   lfi_usr_role tinyint(9) NOT NULL DEFAULT 0,
   lfi_description varchar(255) NULL,
   PRIMARY KEY  (lfi_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%project_link_filter`;
 CREATE TABLE `%TABLE_PREFIX%project_link_filter` (
   plf_prj_id int(11) NOT NULL,
   plf_lfi_id int(11) NOT NULL,
   PRIMARY KEY  (plf_prj_id, plf_lfi_id)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%columns_to_display`;
 CREATE TABLE `%TABLE_PREFIX%columns_to_display` (
@@ -1008,7 +1003,7 @@ CREATE TABLE `%TABLE_PREFIX%columns_to_display` (
   ctd_rank tinyint(2) NOT NULL DEFAULT 0,
   PRIMARY KEY(ctd_prj_id, ctd_page, ctd_field),
   INDEX(ctd_prj_id, ctd_page)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `%TABLE_PREFIX%columns_to_display` VALUES (1,'list_issues','pri_rank',1,1);
 INSERT INTO `%TABLE_PREFIX%columns_to_display` VALUES (1,'list_issues','iss_id',1,2);
 INSERT INTO `%TABLE_PREFIX%columns_to_display` VALUES (1,'list_issues','usr_full_name',1,3);
@@ -1035,11 +1030,11 @@ CREATE TABLE `%TABLE_PREFIX%search_profile` (
   sep_user_profile blob NOT NULL,
   PRIMARY KEY (sep_id),
   UNIQUE (sep_usr_id, sep_prj_id, sep_type)
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%version`;
 CREATE TABLE `%TABLE_PREFIX%version` (
     ver_version int(11) unsigned NOT NULL DEFAULT 0
-) ENGINE = MYISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `%TABLE_PREFIX%version` SET ver_version=5;

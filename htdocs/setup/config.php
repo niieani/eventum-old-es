@@ -75,8 +75,8 @@ define('APP_DEFAULT_WEEKDAY', '%{APP_DEFAULT_WEEKDAY}%');
 define('APP_CHARSET', '%{CHARSET}%');
 
 // define colors used by eventum
-define('APP_CELL_COLOR', '#255282');
-define('APP_LIGHT_COLOR', '#DDDDDD');
+define('APP_CELL_COLOR', '#51708A');
+define('APP_LIGHT_COLOR', '#D8E2ED');
 define('APP_MIDDLE_COLOR', '#CACACA');
 define('APP_DARK_COLOR', '#CACACA');
 define('APP_CYCLE_COLORS', '#DDDDDD,#CACACA');
@@ -101,3 +101,19 @@ define('APP_GETTEXT_MODE', 'native');
 
 // director where to save routed drafts/notes/emails. leave empty/undefined to disable.
 define('APP_ROUTED_MAILS_SAVEDIR', APP_PATH . '/misc');
+
+define('APP_DATE_FORMATTING_STYLE', '%a, %d %b %Y, %H:%M:%S (%Z)');
+define('APP_MEMORY_LIMIT', '1024M');
+define('APP_NOTIFY_AUTO_CREATED_ISSUE', false);
+define('APP_NOTIFY_EMAIL_CONVERTED_INTO_ISSUE', true);
+
+define('APP_DRAFTS_SUPPORT', true);
+define('APP_PHONE_SUPPORT', true);
+define('APP_NOTES_SUPPORT', true);
+define('APP_TIME_TRACKING_SUPPORT', false);
+
+$tld = end(explode('.', APP_HOSTNAME));
+define('MY_DOMAIN', substr(APP_HOSTNAME, 0, ( strlen(APP_HOSTNAME) - strlen($tld) - 1) ));
+define('MY_TLD', '.'.$tld);
+define('MY_CLOSED', 'closed');
+define('MY_DETECTED', 'detected');

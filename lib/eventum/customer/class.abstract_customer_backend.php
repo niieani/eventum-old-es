@@ -628,4 +628,16 @@ class Abstract_Customer_Backend
     function getContractStartDate($customer_id, $contract_id = false)
     {
     }
+
+    /**
+     * Retrieves the support levels associated with the given list of issues.
+     *
+     * @access  public
+     * @param   array $result The list of issues
+     * @see     Issue::getListing()
+     */
+    function getSupportLevelsByIssues(&$result)
+    {
+    }
+
 }
